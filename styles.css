@@ -13,7 +13,7 @@ body{background:var(--black);color:var(--off-white);font-family:var(--font-body)
 ::selection{background:var(--gold);color:var(--black)}
 
 /* ─── NAVBAR ─── */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 4vw;height:72px;background:transparent;border-bottom:1px solid transparent;transition:background .4s ease,border-color .4s ease}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 4vw;height:72px;background:transparent;border-bottom:1px solid transparent;transition:background .4s ease,border-color .4s ease}
 nav.scrolled{background:var(--surface);border-bottom-color:var(--gold)}
 .nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none}
 .nav-logo img{height:44px;width:auto}
@@ -288,14 +288,18 @@ footer{background:var(--black);border-top:1px solid var(--gold);padding:60px 4vw
 
 /* ─── MOBILE MENU OVERLAY ─── */
 .mobile-menu{
-  display:none;position:fixed;inset:0;z-index:99;
+  display:none;position:fixed;
+  top:0;left:0;right:0;bottom:0;
+  width:100%;height:100%;
+  z-index:199;
   background:var(--black);
   flex-direction:column;
-  padding:80px 8vw 48px;
+  padding:80px 7vw 48px;
   overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
   transform:translateX(100%);
-  transition:transform .45s cubic-bezier(.16,1,.3,1);
-  border-left:1px solid rgba(200,150,12,.12);
+  transition:transform .42s cubic-bezier(.16,1,.3,1);
+  border-left:2px solid rgba(200,150,12,.18);
 }
 .mobile-menu.open{transform:translateX(0)}
 .mobile-menu-inner{display:flex;flex-direction:column;min-height:100%}
@@ -387,41 +391,49 @@ footer{background:var(--black);border-top:1px solid var(--gold);padding:60px 4vw
 /* ── Mobile ── */
 @media(max-width:768px){
 
-  /* Navbar */
+  /* Navbar — always solid on mobile so hamburger is visible */
+  nav{
+    height:64px;
+    background:var(--surface)!important;
+    border-bottom:1px solid var(--gold)!important;
+  }
   .nav-logo-text{display:none}
-  .nav-logo img{height:40px}
-  .nav-links{
-    display:none;position:fixed;top:64px;left:0;right:0;
-    background:var(--surface);flex-direction:column;gap:0;
-    padding:.6rem 0 1rem;border-bottom:2px solid var(--gold);
-    box-shadow:0 8px 32px rgba(0,0,0,.6);
+  .nav-logo img{height:38px}
+
+  /* Hide desktop links; replaced by full-screen overlay */
+  .nav-links{display:none!important}
+
+  /* Hamburger — prominent gold button */
+  .nav-hamburger{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:5px;
+    width:48px;height:48px;
+    border:1.5px solid rgba(200,150,12,.5);
+    cursor:pointer;
+    flex-shrink:0;
   }
-  .nav-links.open{display:flex}
-  .nav-links li{width:100%}
-  .nav-links a{
-    display:block;padding:1rem 6vw;
-    font-size:.9rem;letter-spacing:.14em;
-    border-bottom:1px solid rgba(90,90,90,.18);
+  .nav-hamburger span{
+    width:22px;height:2px;
+    background:var(--gold);
+    transition:all .3s;
+    transform-origin:center;
   }
-  .nav-links a::after{display:none}
-  .nav-links li:last-child a{border-bottom:none}
-  .nav-links a.nav-cta{
-    margin:1rem 6vw 0;
-    display:block;text-align:center;
-    padding:14px 6vw!important;
-    border-bottom:none!important;
-  }
-  nav{height:64px}
+  .nav-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .nav-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+  .nav-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
   /* Page hero nav offset */
-  .page-hero{padding-top:64px;height:auto;min-height:0;padding-bottom:56px}
+  .page-hero{padding-top:64px;height:auto;min-height:420px;padding-bottom:56px}
   .page-hero-headline{font-size:clamp(2.8rem,11vw,5rem);line-height:.9}
   .page-hero-eyebrow{margin-bottom:1rem}
   .page-hero-sub{font-size:.9rem;max-width:100%;margin-bottom:0}
 
   /* Home hero */
   .hero{min-height:100svh}
-  .hero-content{padding-top:64px}
+  .hero-content{padding-top:80px}
   .hero-headline{font-size:clamp(3rem,12vw,5rem);line-height:.9;margin-bottom:1.4rem}
   .hero-sub{font-size:.9rem;max-width:100%;margin-bottom:2rem}
   .hero-cta{padding:14px 32px;font-size:.78rem}
