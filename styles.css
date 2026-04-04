@@ -301,7 +301,9 @@ footer{background:var(--black);border-top:1px solid var(--gold);padding:60px 4vw
 .mobile-menu-inner{
   display:flex;
   flex-direction:column;
-  padding:96px 7vw 56px;
+  width:100%;
+  box-sizing:border-box;
+  padding:88px 7vw 56px;
 }
 .mobile-menu-nav{
   display:flex;
@@ -360,7 +362,7 @@ footer{background:var(--black);border-top:1px solid var(--gold);padding:60px 4vw
   font-size:.63rem;letter-spacing:.24em;text-transform:uppercase;
   color:rgba(90,90,90,.4);
 }
-@media(max-width:768px){.mobile-menu{display:flex}}
+@media(max-width:768px){.mobile-menu{display:block}}
 
 /* ─── FAQ (contact.html) ─── */
 .faq-section{background:var(--surface);padding:100px 4vw}
